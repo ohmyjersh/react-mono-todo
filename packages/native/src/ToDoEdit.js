@@ -24,17 +24,17 @@ class ToDoEdit extends React.Component {
     }
 
     onUpdate() {
-        var value = this.refs.form.getValue();
+        var value = this.form.getValue();
         if (value) {
             this.props.update(value, this.props.id);
         }
     }
 
+    form = React.createRef();
     render() {
         return (
             <View style={styles.todo}>
                 <Form
-                    ref="form"
                     type={ToDo}
                     onChange={this._onChange}
                     options={options}

@@ -7,7 +7,7 @@
     "jest-expo": "25.0.0",
     "metro-bundler-config-yarn-workspaces": "^1.0.3",
     "react-native-scripts": "^1.14.1",
-    "react-test-renderer": "16.2.0"
+    "react-test-renderer": "16.4.0"
   },
   "scripts": {
     "prestart": "node link-workspaces.js",
@@ -22,8 +22,10 @@
   },
   "dependencies": {
     "expo": "^25.0.0",
-    "react": "16.2.0",
+    "react": "16.4.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-25.0.0.tar.gz",
-    "tcomb-form-native": "^0.6.15"
+    "react-native-elements": "^0.19.1",
+    "tcomb-form-native": "^0.6.15",
+    "uuid": "^3.3.2"
   }
 }
