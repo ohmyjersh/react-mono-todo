@@ -1,7 +1,2 @@
-const SECRET_SHARED_CODE = "LOL BUTTS"
-export default SECRET_SHARED_CODE;
-
-
-export const defaultState = {
-    
-}
+import TodoStore, {TodosContext} from './TodoStore';
+export default {TodoStore, TodosContext };
