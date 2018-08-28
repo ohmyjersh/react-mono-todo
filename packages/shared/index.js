@@ -1,2 +1,4 @@
 import TodoStore, {TodosContext} from './TodoStore';
-export default {TodoStore, TodosContext };
+import VisibilityStore, {VisibilityContext} from './VisibilityStore';
+export const Todo = {TodoStore, TodosContext};
+export const Visbility = {VisibilityStore, VisibilityContext}
