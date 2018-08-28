@@ -1,13 +1,12 @@
 import React from "react"
-import { VisibilityContext } from "./VisibilityStore"
-import { TodosContext } from "./TodosStore"
+import { Todo,Visbility } from "shared"
 import TodoList  from "./TodoList"
 import getVisibleTodos from "./getVisibleTodos"
 
 const VisibleTodoList = () => (
-  <VisibilityContext.Consumer>
+  <Visbility.VisibilityContext.Consumer>
     {({ visibilityFilter }) => (
-      <TodosContext.Consumer>
+      <Todo.TodosContext.Consumer>
         {({ todos, clearTodo, toggleTodo }) => (
           <TodoList
             todos={getVisibleTodos(todos, visibilityFilter)}
@@ -15,9 +14,9 @@ const VisibleTodoList = () => (
             onToggleTodo={id => toggleTodo(id)}
           />
         )}
-      </TodosContext.Consumer>
+      </Todo.TodosContext.Consumer>
     )}
-  </VisibilityContext.Consumer>
+  </Visbility.VisibilityContext.Consumer>
 )
 
 export default VisibleTodoList

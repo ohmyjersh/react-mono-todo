@@ -1,17 +1,16 @@
 import './App.css';
 
 import React from "react"
-import VisibilityStore from "./VisibilityStore"
-import TodosStore from "./TodosStore"
+import {Todo,Visbility} from "shared"
 import TodoApp from "./TodoApp"
 
 const App = props => {
   return (
-    <VisibilityStore>
-      <TodosStore>
+    <Visbility.VisibilityStore>
+      <Todo.TodoStore>
         <TodoApp />
-      </TodosStore>
-    </VisibilityStore>
+      </Todo.TodoStore>
+    </Visbility.VisibilityStore>
   )
 }
 

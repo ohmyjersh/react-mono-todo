@@ -1,10 +1,10 @@
 import React from "react"
 import PropTypes from "prop-types"
-import { VisibilityContext } from "./VisibilityStore"
+import { Visbility } from "shared"
 import Link from "./Link"
 
 const FilterLink = props => (
-  <VisibilityContext.Consumer>
+  <Visbility.VisibilityContext.Consumer>
     {({ visibilityFilter, setVisibilityFilter }) => (
       <Link
         {...props}
@@ -12,7 +12,7 @@ const FilterLink = props => (
         onClick={() => setVisibilityFilter(props.filter)}
       />
     )}
-  </VisibilityContext.Consumer>
+  </Visbility.VisibilityContext.Consumer>
 )
 
 FilterLink.propTypes = {

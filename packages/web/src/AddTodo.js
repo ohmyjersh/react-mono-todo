@@ -1,11 +1,11 @@
 import React from "react"
 import Input  from "./Input"
-import { TodosContext } from "./TodosStore"
+import { Todo } from "shared"
 
 const AddTodo = () => (
-  <TodosContext.Consumer>
+  <Todo.TodosContext.Consumer>
     {({ addTodo }) => <Input onSubmit={title => addTodo(title)} />}
-  </TodosContext.Consumer>
+  </Todo.TodosContext.Consumer>
 )
 
 export default AddTodo

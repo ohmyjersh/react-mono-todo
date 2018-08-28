@@ -1,11 +1,11 @@
 import React from "react"
-import { TodosContext } from "./TodosStore"
+import {Todo} from "shared"
 import VisibleTodoList from "./VisibleTodoList"
 import AddTodo from "./AddTodo"
 import FilterLink from "./FilterLink"
 
 const TodoApp = () => (
-  <TodosContext.Consumer>
+  <Todo.TodosContext.Consumer>
     {({ error, loadng, todos }) =>
       error ? (
         "An unexpected error occurred"
@@ -25,7 +25,7 @@ const TodoApp = () => (
           </footer>
         </React.Fragment>
       )}
-  </TodosContext.Consumer>
+  </Todo.TodosContext.Consumer>
 )
 
 export default TodoApp
