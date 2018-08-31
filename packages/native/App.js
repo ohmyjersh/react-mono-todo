@@ -4,12 +4,13 @@ import { Constants } from 'expo';
 import { Icon } from 'react-native-elements';
 import uuid from 'uuid';
 import Todo from './Todo.js';
+import {hi} from "shared";
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      todos: [],
+      todos: [{ key: uuid.v4(), done: false, text: hi }],
     };
   }
   submitTodo = () => {
