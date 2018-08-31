@@ -2,9 +2,10 @@
   "name": "todo-native",
   "version": "0.1.0",
   "private": true,
+  "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
   "devDependencies": {
     "crna-make-symlinks-for-yarn-workspaces": "^1.0.1",
-    "jest-expo": "25.0.0",
+    "jest-expo": "27.0.0",
     "metro-bundler-config-yarn-workspaces": "^1.0.3",
     "react-native-scripts": "^1.14.1",
     "react-test-renderer": "16.4.0"
@@ -21,9 +22,9 @@
     "preset": "jest-expo"
   },
   "dependencies": {
-    "expo": "^25.0.0",
+    "expo": "^27.0.0",
     "react": "16.4.0",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-25.0.0.tar.gz",
+    "react-native": "~0.55.2",
     "react-native-elements": "^0.19.1",
     "tcomb-form-native": "^0.6.15",
     "uuid": "^3.3.2"
