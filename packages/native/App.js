@@ -3,10 +3,18 @@ import { StyleSheet, TextInput, View, FlatList, KeyboardAvoidingView } from 'rea
 import { Constants } from 'expo';
 import { Icon } from 'react-native-elements';
 import uuid from 'uuid';
-import Todo from './Todo.js';
-import {hi} from "shared";
+import Todos from './Todo.js';
+import {hi, Todo} from "shared";
 
-export default class App extends React.Component {
+export default class App extends React.Component { 
+  render() {
+    return(
+    <Todo.TodoStore><Container /></Todo.TodoStore>)
+  }
+}
+
+
+ class Container extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -43,7 +51,7 @@ export default class App extends React.Component {
         <FlatList
           data={this.state.todos}
           renderItem={({item}) =>
-            <Todo
+            <Todos
               text={item.text}
               done={item.done}
               onToggleCheck={() => this.toggleCheck(item.key)}
