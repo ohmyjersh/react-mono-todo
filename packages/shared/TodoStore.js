@@ -4,7 +4,7 @@ import v4 from "uuid";
 const defaultState = {
   error: null,
   loading: false,
-  todos: [],
+  todos: [{id:v4(), title:'shared', completed:false}],
 }
 
 export const TodosContext = React.createContext(defaultState)

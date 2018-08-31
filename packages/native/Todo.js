@@ -2,15 +2,15 @@ import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import { CheckBox, Icon } from 'react-native-elements';
 
-export default ({ text, done, onToggleCheck, onDeleteTask }) =>
+export default ({ title, completed, onToggleCheck, onDeleteTask }) =>
   <View style={styles.container}>
     <CheckBox
-      checked={done}
+      checked={completed}
       onPress={onToggleCheck}
       containerStyle={styles.checkBox}
     />
     <View style={styles.wrapper}>
-      <Text>{text}</Text>
+      <Text>{title}</Text>
     </View>
     <Icon
       name="clear"

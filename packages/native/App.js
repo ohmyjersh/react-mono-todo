@@ -18,12 +18,12 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      todos: [{ key: uuid.v4(), done: false, text: hi }],
+      todos: [{ id: uuid.v4(), completed: false, title: hi }],
     };
   }
   submitTodo = () => {
     this.setState(({todos, textInput}) => ({
-      todos: [...todos, { key: uuid.v4(), done: false, text: textInput }],
+      todos: [...todos, { id: uuid.v4(), completed: false, title: textInput }],
       textInput: '',
     }))
   }
@@ -31,15 +31,15 @@ export default class App extends React.Component {
     this.setState(({todos}) => ({
       todos: todos.map(todo => {
         if (todo.key === key) {
-          todo.done = !todo.done;
+          todo.completed = !todo.completed;
         }
         return todo;
       }),
     }));
   }
-  deleteTask = key => {
+  deleteTask = id => {
     this.setState(({todos}) => ({
-      todos: todos.filter(todo => todo.key !== key),
+      todos: todos.filter(todo => todo.id !== id),
     }));
   }
   render() {
@@ -48,16 +48,27 @@ export default class App extends React.Component {
         behavior="padding"
         style={styles.container}
       >
+        <Todo.TodosContext.Consumer>
+    {({ error, loadng, todos }) =>
+      error ? (
+        "An unexpected error occurred"
+      ) : loadng ? (
+        "Loading..."
+      ) : (
         <FlatList
-          data={this.state.todos}
+          data={[...this.state.todos, ...todos].map(x => ({...x, key:x.id}))}
           renderItem={({item}) =>
             <Todos
-              text={item.text}
-              done={item.done}
-              onToggleCheck={() => this.toggleCheck(item.key)}
-              onDeleteTask={() => this.deleteTask(item.key)}
+              key={item.id}
+              title={item.title}
+              completed={item.completed}
+              onToggleCheck={() => this.toggleCheck(item.id)}
+              onDeleteTask={() => this.deleteTask(item.id)}
             />}
         />
+      )}
+  </Todo.TodosContext.Consumer>
+
         <View style={styles.textBox}>
           <View style={styles.wrapper}>
             <TextInput
@@ -98,46 +109,3 @@ const styles = StyleSheet.create({
     flex: 1
   },
 });
-
-// import React from "react";
-// import { StyleSheet, Text, View } from "react-native";
-// import SharedInfo from "shared";
-
-// export default class App extends React.Component {
-//   render() {
-//     return (
-//       <View style={styles.container}>
-//         <Text>{SharedInfo}</Text>
-//       </View>
-//     );
-//   }
-// }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: "#fff",
-//     alignItems: "center",
-//     justifyContent: "center",
-//   },
-// });
-
-
-// import styles from './src/styles';
-// import ToDoListContainer from './src/ToDoListContainer';
-// import React from 'react';
-// import {
-//   NavigatorIOS
-// } from 'react-native';
-
-// class ToDoApp extends React.Component {
-//     render() {
-//         return (
-//             <NavigatorIOS
-//                 style={styles.navigator}
-//                 initialRoute={{component: ToDoListContainer, title: 'TO DOs'}}/>
-//         );
-//     }
-// }
-
-// export default ToDoApp;
