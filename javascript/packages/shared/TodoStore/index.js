@@ -1,10 +1,10 @@
 import React from "react"
-import v4 from "uuid";
+import * as todoFuncs from './todoFuncs';
 
 const defaultState = {
   error: null,
   loading: false,
-  todos: [{id:v4(), title:'shared', completed:false}],
+  todos: [{id:0, title:'shared', completed:false}],
 }
 
 export const TodosContext = React.createContext(defaultState)
@@ -14,26 +14,15 @@ export default class TodosStore extends React.Component {
 
 
   toggleTodo = id => {
-      this.setState(state => ({
-        todos: state.todos.map(todo => {
-          if (todo.id === id) {
-            return { ...todo, completed:!todo.completed}
-          }
-          return todo
-        }),
-      }));
+      this.setState(state => todoFuncs.toggleTodo(state, id));
   }
 
   clearTodo = id => {
-      this.setState(state => ({
-        todos: state.todos.filter(todo => todo.id !== id),
-      }));
+      this.setState(state => todoFuncs.clearTodo(state, id));
  }
 
   addTodo = title => {
-      this.setState(state => ({
-        todos: state.todos.concat({id:v4(), title, completed:false}),
-      }));
+      this.setState(state => todoFuncs.addTodo(state, title));
 }
 
   render() {
