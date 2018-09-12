@@ -29,6 +29,7 @@ export default class TodosStore extends React.Component {
     return (
       <TodosContext.Provider
         value={{
+          stuff:'hi',
           error: this.state.error,
           loading: this.state.loading,
           todos: this.state.todos,

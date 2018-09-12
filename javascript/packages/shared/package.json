@@ -8,6 +8,22 @@
     "uuid": "^3.3.2"
   },
   "devDependencies": {
-    "jest": "^23.5.0"
+    "babel-core": "^6.26.3",
+    "babel-jest": "^23.6.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "jest": "^23.5.0",
+    "jest-cli": "^23.5.0",
+    "react-test-renderer": "^16.4.2",
+    "regenerator-runtime": "^0.12.1"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "jest": {
+    "transform": {
+      "\\.js$": "<rootDir>/node_modules/babel-jest"
+    }
   }
 }
