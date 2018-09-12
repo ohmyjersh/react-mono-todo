@@ -1,9 +1,10 @@
 import React from 'react';
-import { StyleSheet, TextInput, View, FlatList, KeyboardAvoidingView } from 'react-native';
+import { StyleSheet, TextInput, View, FlatList, KeyboardAvoidingView, Button } from 'react-native';
 import { Constants } from 'expo';
 import { Icon } from 'react-native-elements';
 import Todos from './Todo.js';
 import { Todo } from "shared";
+import { Visbility } from "shared"
 
 export default class App extends React.Component {
   render() {
@@ -20,11 +21,24 @@ const Container = () => {
         behavior="padding"
         style={styles.container}
       >
+      <TodoFilters />
       <TodoList />
       <AddTodo />
       </KeyboardAvoidingView>
     );
   };
+
+const TodoFilters = () => (
+  <Visbility.VisibilityContext.Consumer>
+  {({ visibilityFilter, setVisibilityFilter }) => (
+    <View style={styles.filters}>
+        <Button disabled={(visibilityFilter === "SHOW_ALL")} onPress={() => setVisibilityFilter("SHOW_ALL")} title="All" />
+        <Button disabled={(visibilityFilter === "SHOW_ACTIVE")} onPress={() => setVisibilityFilter("SHOW_ACTIVE")}  title="Active"/>
+        <Button disabled={(visibilityFilter === "SHOW_COMPLETED")} onPress={() => setVisibilityFilter("SHOW_COMPLETED")}  title="Completed" />
+      </View>
+      )}
+      </Visbility.VisibilityContext.Consumer>
+)
 
 const TodoList = () => (
   <Todo.TodosContext.Consumer>
@@ -94,6 +108,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     marginTop: Constants.statusBarHeight,
+  },
+  filters: {
+    justifyContent: 'space-around',
+    flexDirection: 'row'
   },
   textBox: {
     flexDirection: 'row',
