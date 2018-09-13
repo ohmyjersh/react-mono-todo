@@ -1,7 +1,6 @@
 import React from "react"
 import { Todo,Visbility, getVisibleTodos } from "shared"
 import TodoList  from "./TodoList"
-import getVisibleTodos from "./getVisibleTodos"
 
 const VisibleTodoList = () => (
   <Visbility.VisibilityContext.Consumer>
