@@ -1,5 +1,5 @@
 import React from "react"
-import { Todo,Visbility } from "shared"
+import { Todo,Visbility, getVisibleTodos } from "shared"
 import TodoList  from "./TodoList"
 import getVisibleTodos from "./getVisibleTodos"
 

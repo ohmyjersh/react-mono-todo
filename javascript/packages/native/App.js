@@ -3,15 +3,16 @@ import { StyleSheet, TextInput, View, FlatList, KeyboardAvoidingView, Button } f
 import { Constants } from 'expo';
 import { Icon } from 'react-native-elements';
 import Todos from './Todo.js';
-import { Todo } from "shared";
-import { Visbility } from "shared"
+import { Todo, Visbility, getVisibleTodos } from "shared"
 
 export default class App extends React.Component {
   render() {
     return (
+    <Visbility.VisibilityStore>
       <Todo.TodoStore>
         <Container />
-      </Todo.TodoStore>)
+      </Todo.TodoStore>
+    </Visbility.VisibilityStore>)
   }
 }
 
@@ -33,7 +34,8 @@ const TodoFilters = () => (
   {({ visibilityFilter, setVisibilityFilter }) => (
     <View style={styles.filters}>
         <Button disabled={(visibilityFilter === "SHOW_ALL")} onPress={() => setVisibilityFilter("SHOW_ALL")} title="All" />
-        <Button disabled={(visibilityFilter === "SHOW_ACTIVE")} onPress={() => setVisibilityFilter("SHOW_ACTIVE")}  title="Active"/>
+        <Button disabled={(visibilityFilter === "SHOW_ACTIVE")} onPress={() =>  {
+            setVisibilityFilter("SHOW_ACTIVE")}}  title="Active"/>
         <Button disabled={(visibilityFilter === "SHOW_COMPLETED")} onPress={() => setVisibilityFilter("SHOW_COMPLETED")}  title="Completed" />
       </View>
       )}
@@ -41,26 +43,30 @@ const TodoFilters = () => (
 )
 
 const TodoList = () => (
-  <Todo.TodosContext.Consumer>
-  {({ error, loadng, todos, toggleTodo, clearTodo }) =>
-    error ? (
-      "An unexpected error occurred"
-    ) : loadng ? (
-      "Loading..."
-    ) : (
-          <FlatList
-            data={todos.map(x => ({ ...x, key: x.id }))}
-            renderItem={({ item }) =>
-              <Todos
-                key={item.id}
-                title={item.title}
-                completed={item.completed}
-                onToggleCheck={() => toggleTodo(item.id)}
-                onDeleteTask={() => clearTodo(item.id)}
-              />}
-          />
-        )}
-</Todo.TodosContext.Consumer>
+  <Visbility.VisibilityContext.Consumer>
+        {({ visibilityFilter }) => (
+    <Todo.TodosContext.Consumer>
+    {({ error, loadng, todos, toggleTodo, clearTodo }) =>
+      error ? (
+        "An unexpected error occurred"
+      ) : loadng ? (
+        "Loading..."
+      ) : (
+            <FlatList
+              data={getVisibleTodos(todos.map(x => ({ ...x, key: x.id })), visibilityFilter)}
+              renderItem={({ item }) =>
+                <Todos
+                  key={item.id}
+                  title={item.title}
+                  completed={item.completed}
+                  onToggleCheck={() => toggleTodo(item.id)}
+                  onDeleteTask={() => clearTodo(item.id)}
+                />}
+            />
+          )}
+  </Todo.TodosContext.Consumer>
+    )}
+</Visbility.VisibilityContext.Consumer>
 );
 
 class AddTodo extends React.Component {
