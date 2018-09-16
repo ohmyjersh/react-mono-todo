@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
+import {TodoConnect} from 'shared';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<TodoConnect><App /></TodoConnect>, document.getElementById('root'));
 registerServiceWorker();

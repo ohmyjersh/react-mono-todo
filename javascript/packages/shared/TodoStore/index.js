@@ -1,5 +1,8 @@
 import React from "react"
+import { Query, Mutation } from 'react-apollo';
+import gql from 'graphql-tag';
 import * as todoFuncs from './todoFuncs';
+
 
 const defaultState = {
   error: null,
@@ -8,6 +11,27 @@ const defaultState = {
 }
 
 export const TodosContext = React.createContext(defaultState)
+
+
+const GET_TODOS = gql`
+    query {
+      todos {
+        id,
+        title,
+        completed
+      }
+    }
+`;
+
+const GetTodos = (props) => (
+  <Query query={GET_TODOS}>
+    {({ loading, error, data }) => {
+      if (error) return error => props.onError(error);
+      if (loading || !data) return () => props.onFetching;
+      return data => props.onSuccess(data);
+    }}
+  </Query>
+)
 
 export default class TodosStore extends React.Component {
   state = defaultState
@@ -29,7 +53,6 @@ export default class TodosStore extends React.Component {
     return (
       <TodosContext.Provider
         value={{
-          stuff:'hi',
           error: this.state.error,
           loading: this.state.loading,
           todos: this.state.todos,
