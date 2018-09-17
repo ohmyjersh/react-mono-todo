@@ -22,7 +22,6 @@ const GET_TODOS = gql`
       }
     }
 `;
-
 const GetTodos = (props) => {
   return (
   <Query query={GET_TODOS}>
@@ -33,6 +32,25 @@ const GetTodos = (props) => {
       return props.onSuccess(data);
     }}
   </Query>) }
+
+const ADD_TODO = gql`
+mutation addTodo($title:String!){
+addTodo(title:$title) {
+  id,
+  title,
+  completed
+}}`;
+
+
+const MARK_AS_COMPLETED = gql`
+mutation markAsComplete($id:String!, $completed:Boolean!){
+markAsComplete(id: $id, completed:$completed) {
+id,
+title,
+completed
+}}`;
+
+
 
 export default class TodosStore extends React.Component {
   state = defaultState
