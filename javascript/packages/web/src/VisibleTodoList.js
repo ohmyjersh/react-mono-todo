@@ -6,11 +6,12 @@ const VisibleTodoList = () => (
   <Visbility.VisibilityContext.Consumer>
     {({ visibilityFilter }) => (
       <Todo.TodosContext.Consumer>
-        {({ todos, clearTodo, toggleTodo }) => (
+        {({ todos, clearTodo, toggleTodo, GetTodos }) => (
           <TodoList
             todos={getVisibleTodos(todos, visibilityFilter)}
             onClearTodo={id => clearTodo(id)}
             onToggleTodo={id => toggleTodo(id)}
+            GetTodos={GetTodos}
           />
         )}
       </Todo.TodosContext.Consumer>

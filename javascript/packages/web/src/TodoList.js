@@ -3,20 +3,28 @@ import PropTypes from "prop-types"
 import Todo from "./Todo"
 
 const TodoList = props => {
+ const {GetTodos} = props;
   return (
-    <ul>
-      {props.todos.map(todo => (
-        <li key={todo.id}>
-          <Todo
-            id={todo.id}
-            text={todo.title}
-            completed={todo.completed}
-            onToggle={props.onToggleTodo}
-            onClear={props.onClearTodo}
-          />
-        </li>
-      ))}
-    </ul>
+    <div>
+    <GetTodos 
+      onError={() => (<div>error</div>)} 
+      onFetching={() => (<div>fetch</div>)} 
+      onSuccess={({todos}) => ( 
+      <ul>
+        {todos.map(todo => (
+          <li key={todo.id}>
+            <Todo
+              id={todo.id}
+              text={todo.title}
+              completed={todo.completed}
+              onToggle={props.onToggleTodo}
+              onClear={props.onClearTodo}
+            />
+          </li>
+        ))}
+      </ul>)}/>
+
+    </div>
   )
 }
 

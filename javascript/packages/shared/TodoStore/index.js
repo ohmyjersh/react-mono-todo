@@ -23,15 +23,16 @@ const GET_TODOS = gql`
     }
 `;
 
-const GetTodos = (props) => (
+const GetTodos = (props) => {
+  return (
   <Query query={GET_TODOS}>
     {({ loading, error, data }) => {
-      if (error) return error => props.onError(error);
-      if (loading || !data) return () => props.onFetching;
-      return data => props.onSuccess(data);
+      console.log(loading);
+      if (error) return props.onError(error);
+      if (loading || !data) return props.onFetching;
+      return props.onSuccess(data);
     }}
-  </Query>
-)
+  </Query>) }
 
 export default class TodosStore extends React.Component {
   state = defaultState
@@ -60,6 +61,7 @@ export default class TodosStore extends React.Component {
           toggleTodo: this.toggleTodo,
           clearTodo: this.clearTodo,
           addTodo: this.addTodo,
+          GetTodos: GetTodos
         }}>
         {this.props.children}
       </TodosContext.Provider>
